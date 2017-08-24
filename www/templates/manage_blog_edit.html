@@ -16,14 +16,14 @@ function initVM(blog) {
         data: blog,
         methods: {
             submit: function (event) {
-                event.preventDefault();
+                event.preventDefault();    <!--禁止直接提交表单采用ajax方法-->
                 var $form = $('#vm').find('form');
-                $form.postJSON(action, this.$data, function (err, r) {
+                $form.postJSON(action, this.$data, function (err, r) {    <!--提交表单后，利用action中的链接调用api，根据action的不同，决定是保存还是修改-->
                     if (err) {
                         $form.showFormError(err);
                     }
                     else {
-                        return location.assign('/manage/blogs');
+                        return location.assign('/manage/blogs');    <!--提交后若没有错误发生，则转到博文管理页面-->
                     }
                 });
             }
@@ -33,7 +33,7 @@ function initVM(blog) {
 }
 
 $(function () {
-    if (ID) {
+    if (ID) {    <!--如果有id，则应为修改页面，调用api获取本就存在的内容-->
         getJSON('/api/blogs/' + ID, function (err, blog) {
             if (err) {
                 return fatal(err);
@@ -97,8 +97,8 @@ $(function () {
                 </div>
             </div>
             <div class="uk-form-row">
-                <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-save"></i> 保存</button>
-                <a href="/manage/blogs" class="uk-button"><i class="uk-icon-times"></i> 取消</a>
+                <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-save"></i> 保存</button>    <!--保存按钮用javascript触发-->
+                <a href="/manage/blogs" class="uk-button"><i class="uk-icon-times"></i> 取消</a>    <!--取消则返回到博文管理界面-->
             </div>
         </form>
     </div>

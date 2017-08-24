@@ -22,7 +22,7 @@ $(function () {
         },
         methods: {
             submit: function (event) {
-                event.preventDefault();
+                event.preventDefault();    <!--禁止直接提交-->
                 var $form = $('#vm');
                 if (! this.name.trim()) {
                     return $form.showFormError('请输入名字');
@@ -40,12 +40,12 @@ $(function () {
                 $form.postJSON('/api/users', {
                     name: this.name.trim(),
                     email: email,
-                    passwd: CryptoJS.SHA1(email + ':' + this.password1).toString()
+                    passwd: CryptoJS.SHA1(email + ':' + this.password1).toString()    <!--调用注册api-->
                 }, function (err, r) {
                     if (err) {
                         return $form.showFormError(err);
                     }
-                    return location.assign('/');
+                    return location.assign('/');    <!--如果没有错误发生，则返回到首页-->
                 });
             }
         }

@@ -11,11 +11,11 @@ function initVM(data) {
         el: '#vm',
         data: {
             blogs: data.blogs,
-            page: data.page
+            page: data.page    <!--获取页码，在底部用到-->
         },
         methods: {
             edit_blog: function (blog) {
-                location.assign('/manage/blogs/edit?id=' + blog.id);
+                location.assign('/manage/blogs/edit?id=' + blog.id);    <!--点击编辑按钮转到对应的编辑页面，?后面是提交的博文id-->
             },
             delete_blog: function (blog) {
                 if (confirm('确认要删除“' + blog.name + '”？删除后不可恢复！')) {
@@ -23,7 +23,7 @@ function initVM(data) {
                         if (err) {
                             return alert(err.message || err.error || err);
                         }
-                        refresh();
+                        refresh();    <!--删除若没有错误发生，则刷新本页面-->
                     });
                 }
             }
@@ -82,7 +82,7 @@ $(function() {    <!--文档就绪后即触发此函数-->
             <tbody>
                 <tr v-repeat="blog: blogs" >
                     <td>
-                        <a target="_blank" v-attr="href: '/blog/'+blog.id" v-text="blog.name"></a>    # <!--点击发送详细博客请求-->
+                        <a target="_blank" v-attr="href: '/blog/'+blog.id" v-text="blog.name"></a>     <!--点击发送详细博客请求-->
                     </td>
                     <td>
                         <a target="_blank" v-attr="href: '/manage/users'" v-text="blog.user_name"></a>    <!--点击进入用户页面，此页面还未创建-->
@@ -91,7 +91,7 @@ $(function() {    <!--文档就绪后即触发此函数-->
                         <span v-text="blog.created_at.toDateTime()"></span>
                     </td>
                     <td>
-                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i>
+                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i>    <!--此处用顶部javascript代码发送请求，所以没有链接-->
                         <a href="#0" v-on="click: delete_blog(blog)"><i class="uk-icon-trash-o"></i>
                     </td>
                 </tr>

@@ -109,11 +109,11 @@ async def get_blog(id):
     }
 
 
-# 根据id获取博文数据?
-# @get('/api/blogs/{id}')
-# async def api_get_blog(*, id):
-#    blog = await Blog.find(id)
-#    return blog
+# 根据id获取博文数据? 此处是修改时用于得到数据的
+@get('/api/blogs/{id}')
+async def api_get_blog(*, id):
+   blog = await Blog.find(id)
+   return blog
 
 
 # 获取注册页面
@@ -275,7 +275,7 @@ def manage_create_blog():
     return {
         '__template__': 'manage_blog_edit.html',
         'id': '',
-        'action': '/api/blogs'    # 表示将博文创建表单发送之后服务器端将要采取的操作
+        'action': '/api/blogs'    # 此action作为url使用
     }
 
 
@@ -301,7 +301,7 @@ def manage_edit_blog(*, id):
     return {
         '__template__': 'manage_blog_edit.html',
         'id': id,
-        'action': '/api/blogs/%s' % id
+        'action': '/api/blogs/%s' % id    # 此action作为url使用，并不是什么request
     }
 
 
