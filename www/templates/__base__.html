@@ -19,12 +19,12 @@
 <html>
 <head>    <!--head元素是所有头部元素的容器-->
     <meta charset="utf-8" />
-    {% block meta %}<!-- block meta  -->{% endblock %}
+    {% block meta %}<!-- block meta  -->{% endblock %}    <!--Django模板表示方法-->
     <title>{% block title %} ? {% endblock %} - Awesome Python Webapp</title>    <!--title标签定义文档的标题，是工具栏和地址栏中的标题-->
     <link rel="stylesheet" href="/static/css/uikit.min.css">    <!--链接一个外部样式表-->
     <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
     <link rel="stylesheet" href="/static/css/awesome.css" />
-    <script src="/static/js/jquery.min.js"></script>    # <!--script标签用于定义客户端脚本-->
+    <script src="/static/js/jquery.min.js"></script>     <!--script标签用于定义客户端脚本-->
     <script src="/static/js/sha1.min.js"></script>
     <script src="/static/js/uikit.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
@@ -39,7 +39,7 @@
             <ul class="uk-navbar-nav">    <!--定义无序列表-->
                 <li data-url="blogs"><a href="/"><i class="uk-icon-home"></i> 日志</a></li>    <!--定义列表项目-->
                 <li><a target="_blank" href="/manage/" target="_blank"><i class="uk-icon-book"></i> 管理</a></li>
-                <li><a target="_blank" href="https://github.com/"><i class="uk-icon-code"></i> 源码</a></li>
+                <li><a target="_blank" href="https://github.com/looplocked/python_web"><i class="uk-icon-code"></i> 源码</a></li>
             </ul>
             <div class="uk-navbar-flip">
                 <ul class="uk-navbar-nav">
@@ -76,7 +76,7 @@
             <div class="uk-panel uk-margin-top uk-margin-bottom">
                 <p>
                     <a target="_blank" href="http://weibo.com/liaoxuefeng" class="uk-icon-button uk-icon-weibo"></a>
-                    <a target="_blank" href="https://github.com/michaelliao" class="uk-icon-button uk-icon-github"></a>
+                    <a target="_blank" href="https://github.com/" class="uk-icon-button uk-icon-github"></a>
                     <a target="_blank" href="http://www.linkedin.com/in/liaoxuefeng" class="uk-icon-button uk-icon-linkedin-square"></a>
                     <a target="_blank" href="https://twitter.com/liaoxuefeng" class="uk-icon-button uk-icon-twitter"></a>
                 </p>

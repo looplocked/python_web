@@ -32,14 +32,14 @@ function initVM(data) {
     $('#vm').show();
 }
 
-$(function() {
+$(function() {    <!--文档就绪后即触发此函数-->
     getJSON('/api/blogs', {
         page: {{ page_index }}
-    }, function (err, results) {
+    }, function (err, results) {    <!--收到的blogs存储在results中-->
         if (err) {
             return fatal(err);
         }
-        $('#loading').hide();
+        $('#loading').hide();    <!--隐藏id为loading的div-->
         initVM(results);
     });
 });

@@ -5,11 +5,11 @@
 {% block content %}
 
     <div class="uk-width-medium-3-4">
-        {% for blog in blogs %}    <!--从哪里拿到的blogs数据？-->
+        {% for blog in blogs %}    <!--从哪里拿到的blogs数据？在app.py里面，template.render()-->
             <article class="uk-article">
                 <h2><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
                 <p class="uk-article-meta">发表于{{ blog.created_at|datetime}}</p>
-                <p>{{ blog.summary }}</p>
+                <p>{{ blog.summary }}</p>    <!--angularJS表达式-->
                 <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>    <!--点击继续阅读发送此文章id构成的链接-->
             </article>
             <hr class="uk-article-divider">

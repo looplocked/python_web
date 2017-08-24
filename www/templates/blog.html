@@ -6,18 +6,18 @@
 
 <script>
 
-var comment_url = '/api/blogs/{{ blog.id }}/comments';    <!--创建评论的api链接-->
+var comment_url = '/api/blogs/{{ blog.id }}/comments';    <!--创建评论的api请求，javascript语法-->
 
-$(function () {
-    var $form = $('#form-comment');
-    $form.submit(function (e) {
-        e.preventDefault();
-        $form.showFormError('');
-        var content = $form.find('textarea').val().trim();
+$(function () {    <!--jquery语法，等效于$(document),ready(function)-->
+    var $form = $('#form-comment');    <!--#form-comment表示id=form-comment-->
+    $form.submit(function (e) {    <!--如果按下提交按钮-->
+        e.preventDefault();    <!--e为event对象，阻止元素发生默认的行为，这里阻止对表单的整个提交-->
+        $form.showFormError('');    <!--见awesome.js-->
+        var content = $form.find('textarea').val().trim();    <!--val方法返回或设置被选元素的值，trim()去掉字符串首尾空格-->
         if (content==='') {
             return $form.showFormError('请输入评论内容！');
         }
-        $form.postJSON(comment_url, { content: content }, function (err, result) {    <!--调用评论api获取评论内容-->
+        $form.postJSON(comment_url, { content: content }, function (err, result) {    <!--如果有内容，提交评论，利用comment_url调用api,保存comment记录， postJson定义见awesome-->
             if (err) {
                 return $form.showFormError(err);
             }
@@ -40,7 +40,7 @@ $(function () {
 
         <hr class="uk-article-divider">
 
-    {% if __user__ %}   <!--如果有用户登录-->
+    {% if __user__ %}   <!--如果有用户登录,则显示评论-->
         <h3>发表评论</h3>
 
         <article class="uk-comment">
