@@ -10,6 +10,7 @@ from urllib import parse
 import logging
 import asyncio
 from apis import APIError
+logging.basicConfig(level=logging.INFO)
 
 __author__ = 'Frank Wang'
 
@@ -131,6 +132,7 @@ class RequestHandler(object):
         # request would be passed in add_route()
         kw = None
         logging.info(str(request))
+        logging.info('starting parse parameters...')
         if(self._has_var_kw_arg or self._has_named_kw_arg
                or self. _get_required_kw_args):    # 存在可变关键字参数，或者命名关键字参数或者无默认值的命名关键字参数
             if request.method == 'POST':
@@ -190,9 +192,9 @@ class RequestHandler(object):
                     logging.warning('Duplicate arg name in named'
                                     'arg and kw args: {0}'.format(k))
                 kw[k] = v
-        logging.info('has request? {0}'.format(str(self._has_request_arg)))
-        if self._has_request_arg:    # 若有request参数且为最后一个参数
+        if self._has_request_arg:    # 若有request参数且为最后一个位置参数
             kw['request'] = request
+            logging.info(str(kw))
         if self._get_required_kw_args:    # 若存在无默认值的命名关键字参数
             for name in self._get_required_kw_args:
                 if name not in kw:

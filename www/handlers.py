@@ -5,12 +5,15 @@ __author__ = 'Michael Liao'
 
 ' url handlers '
 
-import re, time, json, logging, hashlib, base64, asyncio
+import os, re, time, json, logging, hashlib, base64, asyncio
 import markdown2
+import datetime, random
 
 from apis import APIPermissionError, APIError
+logging.basicConfig(level=logging.INFO)
 
 from aiohttp import web
+from flask import url_for
 
 from coroweb import get, post
 from apis import Page, APIValueError, APIResourceNotFoundError
@@ -293,6 +296,47 @@ async def api_create_blog(request, *, name, summary, content):
                 name=name.strip(), summary=summary.strip(), content=content.strip())
     await blog.save()
     return blog
+
+
+# 生成随机文件名
+def gen_rnd_filename():
+    filename_prefix = datetime.datetime().now().strtime('%Y%m%d%H%M%S')
+    return '%s%s' % (filename_prefix, str(random.randrange(1000, 10000)))
+
+
+# 上传文件api
+# @post('/api/ckupload')
+# def ckupload(request):
+#    """CKEditor file upload"""
+#    error = ''
+#    url = ''
+#    callback = request.args.get('CKEditorFuncNum')
+#    logging.info('The upload function is running...')
+#    if request.method == 'POST' and 'upload' in request.files:
+#        fileobj = request.files['upload']
+#        fname, fext = os.path.splitext(fileobj.filename)
+#        rnd_name = '%s%s' % (gen_rnd_filename(), fext)
+#        filepath = os.path.join('E:\python_web\www', 'static', 'upload', rnd_name)
+#        logging.info(str(filepath))
+#        dirname = os.path.dirname(filepath)
+#        if not os.path.exists(dirname):
+#            try:
+#                os.makedirs(dirname)
+#            except:
+#                error = 'ERROR_CREATE_DIR'
+#        elif not os.access(dirname, os.W_OK):
+#            error = 'ERROR_DIR_NOT_WRITEBLE'
+#        if not error:
+#            fileobj.save(filepath)
+#            url = url_for('static', filename='%s%s' % ('upload', rnd_name))
+#    else:
+#        error='post error'
+#    res = """
+#    <script type="text/javascript">
+#    window.parent.CKEDITOR.tools.callFunction(%s, '%s', '%s');
+#    </script>
+#    """ % (callback, url, error)
+#    return res
 
 
 # 获取博文修改页面
