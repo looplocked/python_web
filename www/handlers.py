@@ -83,17 +83,16 @@ async def cookie2user(cookie_str):
 # 首页显示
 @get('/')
 async def index(*, page='1'):
-    page_index = get_page_index(page)
-    num = await Blog.findNumber('count(id)')    # 返回博文总数，通过博文id返回博文总数
-    page = Page(num)    # 根据博文总数生成一个page对象
-    if num == 0:
-        blogs = []
-    else:
-        blogs = await Blog.findAll(orderBy='created_at desc', limit=(page.offset, page.limit))    # 找出对应页数的所有博文，具体请查看select语句order by desc和limit关键字
     return {
         '__template__': 'blogs.html',
-        'page': page,
-        'blogs': blogs
+        'page_index': get_page_index(page)
+    }
+
+
+@get('/about')
+async def about():
+    return {
+        '__template__': 'about.html'
     }
 
 

@@ -29,13 +29,29 @@ $(function () {    <!--jquery语法，等效于$(document),ready(function)-->
 
 {% endblock %}
 
+    {% block header %}
+    <header class="intro-header" style="background-image: url('/static/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="post-heading">
+                        <h1>{{ blog.name }}</h1>
+                        <span class="meta">发表于{{ blog.created_at|datetime }}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    {% endblock %}
+
 {% block content %}
 
-    <div class="uk-width-medium-3-4">
-        <article class="uk-article">
-            <h2>{{ blog.name }}</h2>
-            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
+    <div class="container">
+        <article class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
             <p>{{ blog.html_content|safe }}</p>
+            </div>
         </article>
 
         <hr class="uk-article-divider">
@@ -87,21 +103,5 @@ $(function () {    <!--jquery语法，等效于$(document),ready(function)-->
 
     </div>
 
-    <div class="uk-width-medium-1-4">
-        <div class="uk-panel uk-panel-box">
-            <div class="uk-text-center">
-                <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
-                <h3>{{ blog.user_name }}</h3>
-            </div>
-        </div>
-        <div class="uk-panel uk-panel-header">
-            <h3 class="uk-panel-title">友情链接</h3>
-            <ul class="uk-list uk-list-line">
-                <li><i class="uk-icon-link"></i> <a href="#">编程</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">思考</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">读书</a></li>
-            </ul>
-        </div>
-    </div>
 
 {% endblock %}

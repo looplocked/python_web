@@ -19,11 +19,41 @@
 <html>
 <head>    <!--head元素是所有头部元素的容器-->
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     {% block meta %}<!-- block meta  -->{% endblock %}    <!--Django模板表示方法-->
     <title>{% block title %} ? {% endblock %} - Awesome Python Webapp</title>    <!--title标签定义文档的标题，是工具栏和地址栏中的标题-->
-    <link rel="stylesheet" href="/static/css/uikit.min.css">    <!--链接一个外部样式表-->
+
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
     <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
     <link rel="stylesheet" href="/static/css/awesome.css" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional fonts for this theme -->
+    <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this theme -->
+    <link href="/static/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Temporary navbar container fix until Bootstrap 4 is patched -->
+    <style>
+    .navbar-toggler {
+        z-index: 1;
+    }
+
+    @media (max-width: 576px) {
+        nav > .container {
+            width: 100%;
+        }
+    }
+    </style>
+
+
     <script src="/static/js/jquery.min.js"></script>     <!--script标签用于定义客户端脚本-->
     <script src="/static/js/sha1.min.js"></script>
     <script src="/static/js/uikit.min.js"></script>
@@ -34,33 +64,51 @@
     {% block beforehead %}<!-- before head  -->{% endblock %}
 </head>
 <body>
-    <nav class="uk-navbar uk-navbar-attached uk-margin-bottom">    <!--导航链接的容器-->
-        <div class="uk-container uk-container-center">    <!--块级元素容器-->
-            <a href="/" class="uk-navbar-brand">Awesome</a>
-            <ul class="uk-navbar-nav">    <!--定义无序列表-->
-                <li data-url="blogs"><a href="/"><i class="uk-icon-home"></i> 日志</a></li>    <!--定义列表项目-->
-                <li><a target="_blank" href="/manage/" target="_blank"><i class="uk-icon-book"></i> 管理</a></li>
-                <li><a target="_blank" href="https://github.com/looplocked/python_web"><i class="uk-icon-code"></i> 源码</a></li>
-            </ul>
-            <div class="uk-navbar-flip">
-                <ul class="uk-navbar-nav">
-                {% if __user__ %}    <!--如果用户已经登录-->
-                    <li class="uk-parent" data-uk-dropdown>
-                        <a href="#0"><i class="uk-icon-user"></i> {{ __user__.name }}</a>
-                        <div class="uk-dropdown uk-dropdown-navbar">    <!--鼠标放上则显示列表-->
-                            <ul class="uk-nav uk-nav-navbar">
-                                <li><a href="/signout"><i class="uk-icon-sign-out"></i> 登出</a></li>    <!--i标签显示斜体文本效果-->
-                            </ul>
-                        </div>
+
+    <!--Navigation-->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">    <!--导航链接的容器-->
+        <div class="container">    <!--块级元素容器-->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="/">Starting</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">    <!--定义无序列表-->
+                    <li class="nav-item"><a class="nav-link page-scroll" href="/"> Home</a></li>    <!--定义列表项目-->
+                    <li class="nav-item"><a target="_blank" href="/manage/" target="_blank" class="nav-link page-scroll">Manage</a></li>
+                    <li class="nav-item"><a target="_blank" href="/about" class="nav-link page-scroll">About</a></li>
+                    {% if __user__ %}    <!--如果用户已经登录-->
+                    <li class="nav-item"><a href="#0" class="nav-link page-scroll"><i class="uk-icon-user"></i> {{ __user__.name }}</a></li>
+                    <li class="nav-item"><a href="/signout" class="nav-link page-scroll"><i class="uk-icon-sign-out"></i> Login Out</a></li>    <!--i标签显示斜体文本效果-->
                     </li>
                 {% else %}
-                    <li><a href="/signin"><i class="uk-icon-sign-in"></i> 登陆</a></li>    <!--如果未登录则显示登录按钮-->
-                    <li><a href="/register"><i class="uk-icon-edit"></i> 注册</a></li>
+                    <li class="nav-item"><a href="/signin" class="nav-link page-scroll"><i class="uk-icon-sign-in"></i>Login</a></li>    <!--如果未登录则显示登录按钮-->
+                    <li class="nav-item"><a href="/register" class="nav-link page-scroll"><i class="uk-icon-edit"></i>Sign Up</a></li>
                 {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
+        <!-- Page Header -->
+    {% block header %}
+    <header class="intro-header" style="background-image: url('/static/img/home-bg.jpg')">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="site-heading">
+
+                        <h1>Blog of Frank</h1>
+                        <span class="subheading">A Blog Made by Myself</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    {% endblock %}
 
 <!--正文部分-->
     <div class="uk-container uk-container-center">
@@ -83,7 +131,6 @@
                 </p>
                 <p>Powered by Frank Wang. Copyright &copy; 2017.</p>
                 <p> All rights reserved.</p>
-                <a target="_blank" href="http://www.w3.org/TR/html5/"><i class="uk-icon-html5" style="font-size:64px; color: #444;"></i></a>
             </div>
 
         </div>

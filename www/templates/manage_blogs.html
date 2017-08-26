@@ -91,8 +91,8 @@ $(function() {    <!--文档就绪后即触发此函数-->
                         <span v-text="blog.created_at.toDateTime()"></span>
                     </td>
                     <td>
-                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i>    <!--此处用顶部javascript代码发送请求，所以没有链接-->
-                        <a href="#0" v-on="click: delete_blog(blog)"><i class="uk-icon-trash-o"></i>
+                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i>   </a> <!--此处用顶部javascript代码发送请求，所以没有链接-->
+                        <a href="#0" v-on="click: delete_blog(blog)"><i class="uk-icon-trash-o"></i></a>
                     </td>
                 </tr>
             </tbody>
